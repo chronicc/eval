@@ -1,0 +1,11 @@
+version: '3.2'
+
+services:
+  zookeeper:
+    image: zookeeper
+    container_name: zookeeper
+    ports:
+      - 2181:2181
+    volumes:
+      - ./conf/zoo.cfg:/conf/zoo.cfg
+

@@ -1,0 +1,10 @@
+{
+  "documentsFailed": 1,
+  "documentsFailed.PIPELINE_FAILED": 1,
+  "foo": {
+    "bar": true,
+    "some.splittable.line": "hello"
+  },
+  "foo.bae": 100,
+  "self.carrying.line": "alone"
+}

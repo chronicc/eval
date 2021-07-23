@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  tasks:
+    - include_vars:
+        name: nested_dict
+        file: nested_dict.json
+
+    - debug:
+        var: nested_dict | json_query('files[*].path')
+

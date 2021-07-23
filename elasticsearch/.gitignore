@@ -1,0 +1,2 @@
+kibana_data/*
+!kibana_data/.gitkeep

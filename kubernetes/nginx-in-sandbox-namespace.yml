@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: sandbox
+  labels:
+    name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  serviceAccountName: prometheus
+

@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  tensorflow-serving:
+    image: tensorflow/serving
+    container_name: tfserving_classifier
+    ports:
+      - 8501:8501
+    volumes:
+      - ./img_classifier:/models/img_classifier
+    environment:
+      MODEL_NAME: img_classifier
+
