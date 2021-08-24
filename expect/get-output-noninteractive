@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+## Disable output with log_user 0 and reenable it
+## with log_user 1 for the line which is interesting.
+
+
+output=$(expect <(cat << EOF
+log_user 0
+set prompt {$ }
+spawn some-tool
+expect "Arbitrary long string with wildcard *"
+send "$VAR1\r"
+expect "Enter username:"
+send "$VAR2\r"
+expect "Enter password:"
+send "$VAR3\r"
+log_user 1
+expect $prompt
+EOF
+) | tr -d '\n')
+
+echo "$output"
+
