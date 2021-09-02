@@ -7,7 +7,11 @@ public class MoodAnalyserTest {
     @Test
     public void testMoodAnalysis() {
         final MoodAnalyser moodanalyser = new MoodAnalyser();
-        final String mood = moodanalyser.analyseMood("This is a sad message");
+
+        String mood = moodanalyser.analyseMood("This is a sad message");
         assertThat(mood, is("SAD"));
+
+        mood = moodanalyser.analyseMood("This is a good message");
+        assertThat(mood, is("GOOD"));
     }
 }
