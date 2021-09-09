@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  node:
+    image: node:lts-alpine
+    init: true
+    container_name: node
+    command: entrypoint sleep
+    volumes:
+      - ./entrypoint:/usr/bin/entrypoint
+      - /var/cache/docker-npm:/root/.npm
+    ports:
+      - 127.0.0.1:8080:8080
+
