@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  lighttpd:
+    build: .
+    container_name: lighttpd
+    ports:
+    - 8080:80
+
