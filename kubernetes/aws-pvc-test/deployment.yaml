@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-pv-reclaiming-1
+spec:
+  selector:
+    matchLabels:
+      app: test-pv-reclaiming-1
+  template:
+    metadata:
+      labels:
+        app: test-pv-reclaiming-1
+    spec:
+      containers:
+      - name: test-pv-reclaiming-1
+        image: alpine
+        command: ['/bin/sh']
+        args: ['-c', 'sleep 3600']
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---

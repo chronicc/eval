@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: testing-fdrr5
+  labels:
+    name: testing-fdrr5
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+  namespace: testing-fdrr5
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: task-pv-pod
+  namespace: testing-fdrr5
+  labels:
+    name: task-pv-pod
+spec:
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: task-pv-claim
+  containers:
+  - name: task-pv-pod
+    image: alpine
+    command: ['/bin/sh']
+    args: ['-c', 'sleep 3600']
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    volumeMounts:
+      - mountPath: '/mnt/pv'
+        name: task-pv-storage
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim2
+  namespace: testing-fdrr5
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: task-pv-pod2
+  namespace: testing-fdrr5
+  labels:
+    name: task-pv-pod2
+spec:
+  volumes:
+    - name: task-pv-storage2
+      persistentVolumeClaim:
+        claimName: task-pv-claim2
+  containers:
+  - name: task-pv-pod2
+    image: alpine
+    command: ['/bin/sh']
+    args: ['-c', 'sleep 3600']
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    volumeMounts:
+      - mountPath: '/mnt/pv'
+        name: task-pv-storage2

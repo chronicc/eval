@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bash
+  namespace: default
+  labels:
+    name: bash
+spec:
+  containers:
+  - name: bash
+    image: bash
+    command: ['bash']
+    args: ['-c', 'while true; do sleep 1; done']
+

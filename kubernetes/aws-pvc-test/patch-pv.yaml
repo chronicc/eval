@@ -1,0 +1,8 @@
+spec:
+  claimRef:
+    kind: PersistentVolumeClaim
+    namespace: testing-fdrr5
+    name: task-pv-claim2
+    uid: 1abc4f6f-3f2a-4a96-9ed9-292e185bf55d
+    apiVersion: v1
+    resourceVersion: '112208151'

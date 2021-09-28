@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: testing-q3rsc
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-stateful-testing-q3rsc
+  namespace: testing-q3rsc
+spec:
+  selector:
+    matchLabels:
+      app: nginx-testing-q3rsc
+  serviceName: nginx-svc
+  replicas: 0
+  template:
+    metadata:
+      labels:
+        app: nginx-testing-q3rsc
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+          name: http
+        volumeMounts:
+        - name: www
+          mountPath: /var/www/html
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+  namespace: testing-q3rsc
+  labels:
+    app: nginx-testing-q3rsc
+spec:
+  clusterIP: None
+  selector:
+    app: nginx-testing-q3rsc
+  ports:
+  - name: web
+    port: 80
