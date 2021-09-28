@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shared-volume-test
+spec:
+  selector:
+    matchLabels:
+      app: shared-volume-test
+  template:
+    metadata:
+      labels:
+        app: shared-volume-test
+    spec:
+      volumes:
+      - name: shared-data
+        emptyDir: {}
+      initContainers:
+      - name: init
+        image: bash
+        command: ['bash']
+        args: ['-c', 'echo "Hello, World!" > /mnt/index.txt; sleep 10']
+        volumeMounts:
+        - name: shared-data
+          mountPath: /mnt
+      containers:
+      - name: main
+        image: bash
+        command: ['bash']
+        args: ['-c', 'while true; do sleep 1; done']
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "128Mi"
+          requests:
+            cpu: "200m"
+            memory: "64Mi"
+        volumeMounts:
+        - name: shared-data
+          mountPath: /mnt
