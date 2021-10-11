@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: minio
+spec:
+  containers:
+  - name: s3
+    image: quay.io/minio/minio
+    imagePullPolicy: IfNotPresent
+    args:
+    - server
+    - /mnt/data
+    - --console-address
+    - :9001
+

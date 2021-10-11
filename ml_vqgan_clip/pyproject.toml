@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "ml_vqgan_clip"
+version = "0.1.0"
+description = ""
+authors = ["Thomas Steinert <hello@chroni.cc>"]
+
+[tool.poetry.dependencies]
+einops = "*"
+ftfy = "*"
+imageio-ffmpeg = "*"
+imgtag = "*"
+kornia = "*"
+omegaconf = "*"
+pillow = "7.1.2"
+python = "^3.8"
+python-xmp-toolkit = "*"
+pytorch-lightning = "*"
+regex = "*"
+stegano = "*"
+"taming-transformers" = "*"
+tqdm = "*"
+transformers = "*"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
