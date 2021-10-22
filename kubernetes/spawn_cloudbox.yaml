@@ -9,12 +9,10 @@ spec:
   terminationGracePeriodSeconds: 1
   containers:
   - name: cloudbox
-    image: chronicc/cloudbox:0.2.0
+    image: chronicc/cloudbox:0.2.2
     resources:
       limits:
         cpu: 500m
         memory: '0.5Gi'
     args:
-    - /bin/bash
-    - -c
-    - "while true; do sleep 1; done"
+    - sleep
