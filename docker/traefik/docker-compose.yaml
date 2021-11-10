@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  proxy:
+    image: traefik:v2.5.4
+    command: --api.insecure=true --ping.entrypoint=traefik --providers.docker
+    ports:
+    - "127.0.0.1:80:80"
+    - "127.0.0.1:8080:8080" # API
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+
+  www:
+    image: containous/whoami
+    labels:
+    - "traefik.http.routers.default.rule=PathPrefix(`/`)"
+    - "traefik.http.services.www.loadbalancer.server.port=80"
+    - "traefik.http.routers.default.middlewares=auth@docker"
+    ## Note: all dollar signs in the hash need to be doubled for escaping.
+    ## To create user:password pair, it's possible to use this command:
+    ## echo $(htpasswd -nb user password) | sed -e s/\\$/\\$\\$/g
+    ##
+    ## curl -u apiuser:geheim http://127.0.0.1
+    ##
+    - "traefik.http.middlewares.auth.basicauth.users=apiuser:$$2y$$05$$n09BsWxjv2wxZXZZdtdqYO1XqumO9mfwb1r1UVME6/K4GYKzz4DA2"
+    ## Remove authentication header to not be logged by the application
+    ##
+    - "traefik.http.middlewares.auth.basicauth.removeheader=true"
+
