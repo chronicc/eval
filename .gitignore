@@ -1,6 +1,7 @@
 .dat
 bazel-*
 bin
+node_modules
 obj
 plz-out
 venv
