@@ -1,4 +1,5 @@
 .dat
+*.tgz
 bazel-*
 bin
 node_modules
