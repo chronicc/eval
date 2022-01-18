@@ -1,8 +1,32 @@
+## All catching .gitignore.
+## Sorted by tool first and by lexigraphic order second.
+##
+
+## Bazel
+##
+bazel-*
+
+## Binary Files
+##
 .dat
 *.tgz
-bazel-*
 bin
-node_modules
 obj
+
+
+## Javascript
+##
+node_modules
+
+## NixOS
+##
+result
+
+## Please Build
+##
 plz-out
+
+## Python
+##
+*.egg-info
 venv
