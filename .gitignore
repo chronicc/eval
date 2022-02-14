@@ -30,3 +30,7 @@ plz-out
 ##
 *.egg-info
 venv
+
+## Security
+##
+*.key
