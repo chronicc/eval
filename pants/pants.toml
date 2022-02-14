@@ -1,0 +1,10 @@
+[GLOBAL]
+pants_version = "2.9.0"
+
+[anonymous-telemetry]
+enabled = true
+repo_id = "bdfc647e-dfdb-40c9-a8a2-365716f071c9"
+
+[source]
+root_patterns = ["/", "src", "src/python", "src/py"]
+marker_filenames = ["SOURCE_ROOT"]
