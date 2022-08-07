@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudbox-deployment
+spec:
+  template:
+    spec:
+      containers:
+        - name: cloudbox
+          resources:
+            limits:
+              cpu: 250m
+              memory: 0.25Gi

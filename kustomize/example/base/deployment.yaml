@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudbox-deployment
+  labels:
+    app: cloudbox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudbox
+  template:
+    metadata:
+      labels:
+        app: cloudbox
+    spec:
+      containers:
+        - name: cloudbox
+          image: chronicc/cloudbox:0.3.1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 0.5Gi
+          args:
+            - sleep
+      terminationGracePeriodSeconds: 1
