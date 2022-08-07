@@ -1,7 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-commonLabels:
-  variant: offline
+labels:
+  - pairs:
+      variant: offline
+    includeTemplates: true
 patchesStrategicMerge:
   - deployment.yaml
 resources:
