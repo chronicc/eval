@@ -1,3 +1,6 @@
 apiVersion: skaffold/v4beta3
 kind: Config
-build:
+metadata:
+  name: transposer
+requires:
+  - path: ./frontend

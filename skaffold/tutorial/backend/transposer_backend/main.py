@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
+import uvicorn
 
 
 class Text(BaseModel):
@@ -15,6 +16,8 @@ if env_origins is not None:
     origins = env_origins.split(" ")
 else:
     origins = ["http://127.0.0.1", "http://127.0.0.1:5500"]
+
+print("Adding origins: %s" % origins)
 
 app.add_middleware(
     CORSMiddleware,
@@ -35,3 +38,11 @@ async def status():
 async def reverse(text: Text):
     r = text.content[::-1]
     return r
+
+
+def run():
+    uvicorn.run("transposer_backend.main:app",
+                host="0.0.0.0",
+                port=8000,
+                reload=False,
+                log_level="info")

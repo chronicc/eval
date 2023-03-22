@@ -2,11 +2,17 @@ $(function () {
   var backendUrl = ""
 
   $.ajax({
-    url: 'backend-url.env',
+    url: '.env',
     async: false,
     success: function (response) {
-      console.log(response)
-      backendUrl = response
+      envvars = response.split('\n')
+      environment = {}
+      envvars.forEach(v => {
+        kvp = v.split("=")
+        environment[kvp[0]] = kvp[1]
+      });
+      console.log(environment)
+      backendUrl = environment["BACKEND_URL"]
     }
   });
 
@@ -16,7 +22,7 @@ $(function () {
     console.log(data)
     var body = JSON.stringify(data)
     $.ajax({
-      url: backendUrl,
+      url: backendUrl + '/reverse',
       contentType: "application/json",
       data: body,
       dataType: "json",

@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: transposer-backend-config
+data:
+  ORIGINS: "http://127.0.0.1:8080 http://localhost:8080"

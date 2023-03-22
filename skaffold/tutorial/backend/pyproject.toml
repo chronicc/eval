@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "skaffold-tutorial"
+name = "transposer-backend"
 version = "0.1.0"
-description = "A tutorial showing the power of skaffold."
+description = "The backend for the transposer application."
 authors = ["Thomas Steinert <hello@chroni.cc>"]
 license = "MIT"
 
@@ -11,6 +11,10 @@ fastapi = "^0.94.1"
 uvicorn = {extras = ["standard"], version = "^0.21.0"}
 
 [tool.poetry.dev-dependencies]
+pytest = "^7.2.2"
+
+[tool.poetry.scripts]
+transposer-backend = 'transposer_backend.main:run'
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

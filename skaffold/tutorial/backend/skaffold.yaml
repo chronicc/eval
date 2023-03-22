@@ -1,0 +1,22 @@
+apiVersion: skaffold/v4beta3
+kind: Config
+metadata:
+  name: backend
+build:
+  artifacts:
+    - image: transposer-backend
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - kubernetes/configmap.yaml
+    - kubernetes/deployment.yaml
+    - kubernetes/service.yaml
+deploy:
+  kubectl: {}
+portForward:
+  - resourceType: service
+    resourceName: transposer-backend
+    namespace: default
+    port: 8000
+    localPort: 8000
