@@ -1,0 +1,65 @@
+apiVersion: skaffold/v4beta5
+kind: Config
+metadata:
+  name: postgresql-primary
+
+manifests:
+  helm:
+    releases:
+      - name: primary
+        remoteChart: oci://registry-1.docker.io/bitnamicharts/postgresql
+        valuesFiles:
+          - primary.yaml
+        version: 12.5.7
+        upgradeOnChange: true
+
+deploy:
+  kubectl: {}
+
+---
+apiVersion: skaffold/v4beta5
+kind: Config
+metadata:
+  name: postgresql-secondary
+
+requires:
+  - configs:
+      - postgresql-primary
+
+manifests:
+  helm:
+    releases:
+      - name: secondary
+        remoteChart: oci://registry-1.docker.io/bitnamicharts/postgresql
+        valuesFiles:
+          - secondary.yaml
+        version: 12.5.7
+        upgradeOnChange: true
+
+deploy:
+  kubectl: {}
+
+---
+apiVersion: skaffold/v4beta5
+kind: Config
+metadata:
+  name: postgresql-admin
+
+requires:
+  - configs:
+      - postgresql-primary
+      - postgresql-secondary
+
+manifests:
+  helm:
+    releases:
+      - name: postgresql-admin
+        remoteChart: pgadmin4
+        valuesFiles:
+          - pgadmin.yaml
+        version: 1.15.2
+        repo: https://helm.runix.net
+        upgradeOnChange: true
+
+deploy:
+  kubectl: {}
