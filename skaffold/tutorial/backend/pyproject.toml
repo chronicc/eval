@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "transposer-backend"
+version = "0.1.0"
+description = "The backend for the transposer application."
+authors = ["Thomas Steinert <hello@chroni.cc>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.94.1"
+uvicorn = {extras = ["standard"], version = "^0.21.0"}
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.2.2"
+
+[tool.poetry.scripts]
+transposer-backend = 'transposer_backend.main:run'
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

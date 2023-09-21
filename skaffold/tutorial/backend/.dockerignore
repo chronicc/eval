@@ -1,0 +1,6 @@
+.pytest_cache
+dist
+Dockerfile
+kubernetes
+skaffold.yaml
+tests

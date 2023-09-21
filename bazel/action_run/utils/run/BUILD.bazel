@@ -1,0 +1,7 @@
+exports_files(["run.sh"])
+
+sh_binary(
+    name = "run_binary",
+    srcs = ["run.sh"],
+    visibility = ["//visibility:public"],
+)

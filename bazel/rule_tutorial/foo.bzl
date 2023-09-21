@@ -9,9 +9,8 @@ def _foo_binary_impl(ctx):
 foo_binary = rule(
     implementation = _foo_binary_impl,
     attrs = {
-        "username": attr.string(),
+        "username": attr.string(mandatory=True),
     },
 )
 
 print("bzl file evaluated")
-

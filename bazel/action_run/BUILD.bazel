@@ -1,0 +1,7 @@
+load("//bazel/action_run/utils/run:run.bzl", "run_example")
+
+run_example(
+    name = "action_run",
+    out = "output.txt",
+    source = "//bazel/action_run:source.txt",
+)
