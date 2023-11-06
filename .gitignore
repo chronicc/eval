@@ -34,8 +34,9 @@ plz-out
 
 ## Python
 ##
-*.egg-info
 __pycache__
+.venv
+*.egg-info
 venv
 
 ## Security
