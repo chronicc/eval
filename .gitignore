@@ -44,3 +44,7 @@ venv
 *.crt
 *.csr
 *.key
+
+## Visual Studio Code
+##
+.vscode
