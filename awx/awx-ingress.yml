@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: awx
+  namespace: awx
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - awx.minikube.local
+    secretName: awx-cert
+  rules:
+  - host: awx.minikube.local
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: awx-service
+              port:
+                number: 80
