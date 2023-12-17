@@ -1,0 +1,56 @@
+---
+- name: Delete copied templates and organizations
+  hosts: localhost
+  tasks:
+    # Don't forget to source the 05-export-controller-env-values.source file
+    - name: Collect list of copied templates or fallback to empty list
+      block:
+        - name: Collect list of copied templates
+          ansible.builtin.set_fact:
+            _templates: >-
+              {{
+                lookup('awx.awx.controller_api', 'job_templates', return_all=true)
+                | selectattr('name', 'match', 'ping-template-\(org-[\d]+\)')
+                | map(attribute='name')
+                | list
+              }}
+      rescue:
+        - name: Set empty list of copied templates
+          ansible.builtin.set_fact:
+            _templates: []
+
+    - name: Collect list of organizations or fallback to empty list
+      block:
+        - name: Collect list of organizations
+          ansible.builtin.set_fact:
+            _organizations: >-
+              {{
+                lookup('awx.awx.controller_api', 'organizations', return_all=true)
+                | selectattr('name', 'match', 'org-[\d]+')
+                | map(attribute='name')
+                | list
+              }}
+      rescue:
+        - name: Set empty list of organizations
+          ansible.builtin.set_fact:
+            _organizations: []
+
+    - name: Show found templates
+      ansible.builtin.debug:
+        msg: "{{ _templates }}"
+
+    - name: Show found organizations
+      ansible.builtin.debug:
+        msg: "{{ _organizations }}"
+
+    - name: Delete ping templates
+      awx.awx.job_template:
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ _templates }}"
+
+    - name: Delete organizations
+      awx.awx.organization:
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ _organizations }}"

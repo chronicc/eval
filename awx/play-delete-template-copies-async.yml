@@ -1,0 +1,62 @@
+---
+- name: Delete copied templates and organizations
+  hosts: localhost
+  tasks:
+    # Don't forget to source the 05-export-controller-env-values.source file
+    - name: Collect a list of copied templates and organizations
+      ansible.builtin.set_fact:
+        _templates: >-
+          {{
+            lookup('awx.awx.controller_api', 'job_templates', return_all=true)
+            | selectattr('name', 'match', 'ping-template-\(org-[\d]+\)')
+            | map(attribute='name')
+            | list
+          }}
+        _organizations: >-
+          {{
+            lookup('awx.awx.controller_api', 'organizations', return_all=true)
+            | selectattr('name', 'match', 'org-[\d]+')
+            | map(attribute='name')
+            | list
+          }}
+
+    - name: Show found templates
+      ansible.builtin.debug:
+        msg: "{{ _templates }}"
+
+    - name: Show found organizations
+      ansible.builtin.debug:
+        msg: "{{ _organizations }}"
+
+    - name: Delete ping templates
+      awx.awx.job_template:
+        name: "{{ item }}"
+        state: absent
+      async: 300
+      poll: 0
+      loop: "{{ _templates }}"
+      register: _async
+
+    - name: Wait for templates being deleted
+      ansible.builtin.async_status:
+        jid: "{{ item.ansible_job_id }}"
+      loop: "{{ _async.results }}"
+      register: _async_results
+      until: _async_results.finished
+
+    - name: Delete organizations
+      awx.awx.organization:
+        name: "{{ item }}"
+        state: absent
+      async: 300
+      poll: 0
+      loop: "{{ _organizations }}"
+      register: _async
+
+    - name: Wait for organizations being deleted
+      ansible.builtin.async_status:
+        jid: "{{ item.ansible_job_id }}"
+      loop: "{{ _async.results }}"
+      register: _async_results
+      until: _async_results.finished
+      retries: 5

@@ -1,0 +1,33 @@
+---
+- name: Create AWX template
+  hosts: localhost
+  tasks:
+    # Don't forget to source the 05-export-controller-env-values.source file
+    - name: Create an awx template
+      awx.awx.job_template:
+        name: ping-template
+        job_type: run
+        organization: Default
+        inventory: Demo Inventory
+        project: Demo Project
+        playbook: hello_world.yml
+        credentials:
+          - Demo Credential
+        state: present
+        survey_enabled: true
+
+    - name: Create notification template
+      awx.awx.notification_template:
+        name: webhook start
+        organization: Default
+        notification_type: webhook
+        notification_configuration:
+          url: http://127.0.0.1
+          headers: {}
+        state: present
+
+    - name: Add start notification to Job Template
+      awx.awx.job_template:
+        name: "ping-template"
+        notification_templates_started:
+          - webhook start

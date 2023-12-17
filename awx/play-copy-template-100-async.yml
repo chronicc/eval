@@ -1,0 +1,57 @@
+---
+- name: Create AWX template
+  hosts: localhost
+  tasks:
+    # Don't forget to source the 05-export-controller-env-values.source file
+    - name: Create organizations
+      awx.awx.organization:
+        name: "org-{{ item }}"
+        state: present
+      async: 300
+      poll: 0
+      loop: "{{ range(1, 101) | list }}"
+      register: _async
+
+    - name: Wait for organizations being created
+      ansible.builtin.async_status:
+        jid: "{{ item.ansible_job_id }}"
+      loop: "{{ _async.results }}"
+      register: _async_results
+      until: _async_results.finished
+      retries: 5
+
+    - name: Copy ping-templates
+      awx.awx.job_template:
+        name: "ping-template-(org-{{ item }})"
+        copy_from: ping-template
+        state: present
+      async: 300
+      poll: 0
+      loop: "{{ range(1, 101) | list }}"
+      register: _async
+
+    - name: Wait for templates being copied
+      ansible.builtin.async_status:
+        jid: "{{ item.ansible_job_id }}"
+      loop: "{{ _async.results }}"
+      register: _async_results
+      until: _async_results.finished
+      retries: 5
+
+    - name: Add start notification to job templates
+      awx.awx.job_template:
+        name: "ping-template-(org-{{ item }})"
+        notification_templates_started:
+          - webhook start
+      async: 300
+      poll: 0
+      loop: "{{ range(1, 101) | list }}"
+      register: _async
+
+    - name: Wait for start notifications being added to templates
+      ansible.builtin.async_status:
+        jid: "{{ item.ansible_job_id }}"
+      loop: "{{ _async.results }}"
+      register: _async_results
+      until: _async_results.finished
+      retries: 5

@@ -1,3 +1,7 @@
 ---
 AWX:
   enabled: true
+  spec:
+    ingress_type: ingress
+    hostname: awx.minikube.local
+    ingress_tls_secret: awx-cert
