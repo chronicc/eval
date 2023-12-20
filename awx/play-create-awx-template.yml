@@ -3,6 +3,34 @@
   hosts: localhost
   tasks:
     # Don't forget to source the 05-export-controller-env-values.source file
+    - name: Create default organization
+      awx.awx.organization:
+        name: Default
+        state: present
+
+    - name: Create default inventory
+      awx.awx.inventory:
+        name: Demo Inventory
+        organization: Default
+        state: present
+
+    - name: Create default project
+      awx.awx.project:
+        name: Demo Project
+        organization: Default
+        scm_type: git
+        scm_url: https://github.com/ansible/ansible-tower-samples
+
+    - name: Create default credential
+      awx.awx.credential:
+        name: Demo Credential
+        credential_type: Machine
+        organization: Default
+        inputs:
+          username: admin
+          password: password
+        state: present
+
     - name: Create an awx template
       awx.awx.job_template:
         name: ping-template

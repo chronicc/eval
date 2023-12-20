@@ -3,23 +3,23 @@
   hosts: localhost
   tasks:
     # Don't forget to source the 05-export-controller-env-values.source file
-    - name: "Create organization {{ item }}"
+    - name: Create organization
       awx.awx.organization:
         name: "org-{{ item }}"
         state: present
-      loop: "{{ range(1, 101) | list }}"
+      loop: "{{ range(1, 11) | list }}"
 
-    - name: "Copy ping-template for org {{ item }}"
+    - name: Copy ping-template
       awx.awx.job_template:
         name: "ping-template-(org-{{ item }})"
         copy_from: ping-template
         organization: "org-{{ item }}"
         state: present
-      loop: "{{ range(1, 101) | list }}"
+      loop: "{{ range(1, 11) | list }}"
 
     - name: Add start notification to Job Template
       awx.awx.job_template:
         name: "ping-template-(org-{{ item }})"
         notification_templates_started:
           - webhook start
-      loop: "{{ range(1, 101) | list }}"
+      loop: "{{ range(1, 11) | list }}"
