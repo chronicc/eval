@@ -1,0 +1,16 @@
+version: '3.8'
+
+volumes:
+  fdb1_data:
+
+services:
+  fdb1:
+    image: foundationdb/foundationdb:7.3.31
+    network_mode: host
+    ports:
+      - 4500:4500
+    volumes:
+      - fdb1_data:/var/fdb/data
+    environment:
+      FDB_NETWORKING_MODE: host
+    restart: always
