@@ -2,6 +2,11 @@
 AWX:
   enabled: true
   spec:
+    extra_settings:
+      - setting: MAX_PAGE_SIZE
+        value: "500"
+
     ingress_type: ingress
-    hostname: awx.minikube.local
-    ingress_tls_secret: awx-cert
+    ingress_hosts:
+      - hostname: awx.minikube.local
+        tls_secret: awx-cert

@@ -1,3 +1,4 @@
 export CONTROLLER_HOST=awx.minikube.local
 export CONTROLLER_USERNAME=admin
-export CONTROLLER_PASSWORD=$(kubectl -n awx get secrets awx-demo-admin-password -o jsonpath="{.data.password}" | base64 -d; echo -n)
+export CONTROLLER_PASSWORD=$(kubectl -n awx get secrets awx-admin-password -o jsonpath="{.data.password}" | base64 -d; echo -n)
+export CONTROLLER_VERIFY_SSL=false
