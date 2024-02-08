@@ -3,7 +3,7 @@ runtime:
   name: python
   options:
     virtualenv: venv
-description: A evaluation program for kubernetes-python
+description: An evaluation program for kubernetes-python
 config:
   pulumi:tags:
     value:
