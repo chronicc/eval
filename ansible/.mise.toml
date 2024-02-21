@@ -1,0 +1,25 @@
+[env]
+MISE_PYTHON_VENV_AUTO_CREATE=1
+
+[tools]
+python = {version="3.12", virtualenv=".venv"}
+
+[tasks.clean]
+description = "Clean project"
+run = """
+#!/usr/bin/env bash
+rm -rf .venv
+"""
+
+[tasks.install-requirements]
+description = "Install project requirements"
+run = "pip install -r requirements.lock"
+
+[tasks.upgrade-requirements]
+description = "Upgrade project requirements"
+run = """
+#!/usr/bin/env bash
+pip install --upgrade pip
+pip install --upgrade --requirement=requirements.txt
+pip freeze > requirements.lock
+"""

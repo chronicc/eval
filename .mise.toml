@@ -2,6 +2,7 @@
 minikube = "1.32.0"
 pulumi = "3.104.2"
 tilt = "0.33.11"
+python = "3.12"
 
 [tasks.kubernetes-up]
 description = "Start a local Kubernetes cluster"

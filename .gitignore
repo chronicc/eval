@@ -2,6 +2,9 @@
 ## Sorted by tool first and by lexigraphic order second.
 ##
 
+## Ansible
+artifacts/
+
 ## Bazel
 ##
 bazel-*
@@ -12,7 +15,6 @@ bazel-*
 *.tgz
 bin
 obj
-
 
 ## Javascript
 ##
@@ -35,9 +37,9 @@ plz-out
 ## Python
 ##
 __pycache__
-.venv
+.venv/
 *.egg-info
-venv
+venv/
 
 ## Security
 ##
