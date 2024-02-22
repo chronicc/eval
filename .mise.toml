@@ -4,6 +4,9 @@ pulumi = "3.107.0"
 tilt = "0.33.11"
 python = "3.12"
 
+[settings]
+experimental = true
+
 [tasks.kubernetes-up]
 description = "Start a local Kubernetes cluster"
 file = "kubernetes/k8s-start-cluster.sh"
