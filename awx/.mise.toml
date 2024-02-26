@@ -1,0 +1,50 @@
+[tools]
+python = {version = "3.12", virtualenv = ".venv"}
+
+[settings]
+experimental = true
+python_venv_auto_create = true
+
+### Tasks #####################################################################
+
+[tasks.clean]
+description = "Start from a clean state"
+run = """
+#!/usr/bin/env bash
+rm -rf .venv
+"""
+
+[tasks.install]
+description = "Install project dependencies"
+depends = [
+  "config:local",
+]
+run = """
+#!/usr/bin/env bash
+mise install
+mise env >/dev/null
+mise run pip:install
+"""
+
+[tasks."config:local"]
+description = "Create the local mise config from template"
+run = """
+#!/usr/bin/env bash
+if [ ! -f .mise.local.toml ]
+then
+  cp .mise.local.template.toml .mise.local.toml
+fi
+"""
+
+[tasks."pip:install"]
+description = "Install python requirements"
+run = "pip install -r requirements.lock"
+
+[tasks."pip:upgrade"]
+description = "Upgrade python requirements"
+run = """
+#!/usr/bin/env bash
+pip install --upgrade pip
+pip install --upgrade --requirement=requirements.txt
+pip freeze > requirements.lock
+"""
