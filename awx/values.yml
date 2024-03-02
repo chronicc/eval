@@ -8,5 +8,5 @@ AWX:
 
     ingress_type: ingress
     ingress_hosts:
-      - hostname: awx.minikube.local
+      - hostname: awx.kubernetes.local
         tls_secret: awx-cert

@@ -1,2 +1,2 @@
 [awx]
-awx.minikube.local ansible_user=root
+awx.kubernetes.local ansible_user=root
