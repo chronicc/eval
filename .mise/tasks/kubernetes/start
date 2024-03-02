@@ -6,4 +6,8 @@ if [ -z "$NODE_COUNT" ]; then
   NODE_COUNT=1
 fi
 
-minikube --nodes $NODE_COUNT --profile eval start
+minikube --profile eval \
+  --addons=ingress,metrics-server \
+  --cpus="4" \
+  --nodes="$NODE_COUNT" \
+  start
