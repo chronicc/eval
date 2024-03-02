@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# mise description="Delete the kubernetes cluster"
+
+minikube --profile eval delete

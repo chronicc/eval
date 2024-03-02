@@ -7,15 +7,3 @@ tilt = "0.33.11"
 
 [settings]
 experimental = true
-
-[tasks.kubernetes-up]
-description = "Start a local Kubernetes cluster"
-file = "kubernetes/k8s-start-cluster.sh"
-
-[tasks.kubernetes-down]
-description = "Stop the local Kubernetes cluster"
-file = "kubernetes/k8s-stop-cluster.sh"
-
-[tasks.kubernetes-delete]
-description = "Delete the local kubernetes cluster"
-file = "kubernetes/k8s-delete-cluster.sh"

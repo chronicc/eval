@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# mise description="Start a kubernetes cluster"
+
+NODE_COUNT=$1
+if [ -z "$NODE_COUNT" ]; then
+  NODE_COUNT=1
+fi
+
+minikube --nodes $NODE_COUNT --profile eval start
