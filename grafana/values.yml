@@ -1,0 +1,10 @@
+---
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hosts:
+    - grafana.kubernetes.local
+  tls:
+    - secretName: grafana-tls
+      hosts:
+        - grafana.kubernetes.local
