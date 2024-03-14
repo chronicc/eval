@@ -1,0 +1,11 @@
+---
+additionalEnv:
+  - name: DOCKER_VERNEMQ_ACCEPT_EULA
+    value: 'yes'
+
+replicaCount: 3
+
+ingress:
+  enabled: 'yes'
+  hosts:
+    - mqtt.kubernetes.local
