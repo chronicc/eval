@@ -5,7 +5,7 @@ cleanup() {
     rm -f /tmp/traps.lock
 }
 
-trap "exit" SIGHUB SIGINT SIGTERM
+trap "exit" HUP INT TERM
 trap cleanup EXIT
 
 touch /tmp/traps.lock
