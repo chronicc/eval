@@ -1,0 +1,10 @@
+name: aws-kubernetes-cluster
+runtime:
+  name: python
+  options:
+    virtualenv: .venv
+description: A full example of an AWS Kubernetes Cluster Deployment
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: python

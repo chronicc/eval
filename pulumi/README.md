@@ -2,6 +2,14 @@
 
 ## Cheatsheet
 
+### Create a new pulumi project
+
+```shell
+mkdir <project-dir>
+cd <project-dir>
+pulumi new python -y
+```
+
 ### Use local backend for state
 
 Run `pulumi login --local` to store states inside of `~/.pulumi`.

@@ -1,0 +1,5 @@
+encryptionsalt: v1:LN/ErXWF+Ec=:v1:zPrC74xmw2t1D7Kx:ekCW5wZFjswuBsANCdrrXjaugSAGBw==
+config:
+  aws-kubernetes-cluster:eks-default-instance: t3.small
+  aws:profile: jb-admin
+  aws:region: eu-central-1
