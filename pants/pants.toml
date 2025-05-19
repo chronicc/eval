@@ -1,9 +1,25 @@
 [GLOBAL]
-pants_version = "2.9.0"
+pants_version = "2.26.0"
+
+backend_packages = [
+    "pants.backend.docker.lint.hadolint",
+    "pants.backend.docker",
+    "pants.backend.shell",
+]
 
 [anonymous-telemetry]
 enabled = true
 repo_id = "bdfc647e-dfdb-40c9-a8a2-365716f071c9"
+
+[docker]
+build_verbose = true
+use_buildx = true
+
+[dockerfile-parser]
+interpreter_constraints = [
+    ">=3.12",
+]
+use_rust_parser = true
 
 [source]
 root_patterns = ["/", "src", "src/python", "src/py"]

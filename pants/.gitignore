@@ -1,0 +1,7 @@
+
+# Pants Build System
+.pants.d
+/dist
+
+# Python
+.venv

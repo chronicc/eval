@@ -1,0 +1,7 @@
+[env]
+
+[settings]
+
+[tools]
+scie-pants = "latest"
+usage = "latest"
