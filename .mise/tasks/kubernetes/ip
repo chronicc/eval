@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-# mise description="Get the ip of the kubernetes cluster"
-
-minikube --profile eval ip
