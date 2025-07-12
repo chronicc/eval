@@ -1,0 +1,27 @@
+---
+role_name_check: 1
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+platforms:
+  - name: instance
+    box: "${MOLECULE_DISTRO:-generic/ubuntu2204}"
+    memory: 4096
+    cpus: 2
+    disk_size: 20G
+    interfaces:
+      - network_name: private_network
+        type: dhcp
+    config_options:
+      ssh.remote_user: vagrant
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  options:
+    diff: true
+verifier:
+  name: ansible

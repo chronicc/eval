@@ -1,5 +1,0 @@
-pip-tools
-
-# Streamlit
-streamlit == 1.*
-

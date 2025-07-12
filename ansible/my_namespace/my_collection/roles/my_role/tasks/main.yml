@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT-0
+---
+- name: Ensure dependencies are installed
+  ansible.builtin.apt:
+    cache_valid_time: 3600
+    install_recommends: false
+    name: "{{ item }}"
+    state: present
+    update_cache_retries: 3
+    update_cache: true
+  loop:
+    - bash
+    - bash-completion

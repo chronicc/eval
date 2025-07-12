@@ -1,0 +1,18 @@
+[project]
+name = "eval"
+version = "0.1.0"
+description = "Evaluation of various technologies"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+ansible = [
+    "ansible>=11.7.0",
+    "ansible-lint>=25.6.1",
+    "molecule==25.1.0",
+    "molecule-docker>=2.1.0",
+    "molecule-plugins[vagrant]>=23.7.0",
+    "python-vagrant>=1.0.0",
+    "pywinrm>=0.5.0",
+]

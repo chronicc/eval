@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  become: true
+  pre_tasks:
+    - name: Ensure apt cache is updated
+      ansible.builtin.apt:
+        update_cache: true
+  roles:
+    - role: my_namespace.my_collection.my_role
