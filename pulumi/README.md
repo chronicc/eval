@@ -1,6 +1,8 @@
-# Pulumi
+Pulumi Evaluation
+=================
 
-## Cheatsheet
+Cheatsheet
+----------
 
 ### Create a new pulumi project
 
